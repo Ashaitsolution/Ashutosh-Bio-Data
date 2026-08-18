@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage Biodata - ASHA IT Solution</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Tiro+Devanagari+Hindi&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Merriweather:wght@300;400;700&family=Marcellus&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'page-bg': 'var(--bg-page)',
+                        'banner-bg': 'var(--bg-banner)',
+                        'border-accent': 'var(--border-accent)',
+                        'header-text': 'var(--header-text)',
+                        'heading-gold': 'var(--heading-gold)',
+                        'text-label': 'var(--text-label)',
+                        'text-value': 'var(--text-value)',
+                        'colon-color': 'var(--colon-color)',
+                    },
+                    fontFamily: {
+                        'cinzel': ['Cinzel', 'serif'],
+                        'lora': ['Lora', 'serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                        'devanagari': ['"Tiro Devanagari Hindi"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            /* 1. Shubh Haldi (Turmeric Gold & Crimson Maroon) - Default Vedic */
+            --bg-page: #FAF5EE;
+            --bg-banner: #F3EBE0;
+            --border-accent: #C5A059;
+            --header-text: #7A1C1C;
+            --heading-gold: #8C5A18;
+            --text-label: #3A2E26;
+            --text-value: #1A120B;
+            --colon-color: #A67C1E;
+            --card-shadow: rgba(122, 28, 28, 0.06);
+        }
+
+        .theme-kesar {
+            /* 2. Kesar Chandan (Saffron & Sandalwood Gold) */
+            --bg-page: #FFFBF2;
+            --bg-banner: #FCEFD5;
+            --border-accent: #D97706;
+            --header-text: #991B1B;
+            --heading-gold: #B45309;
+            --text-label: #451A03;
+            --text-value: #1C1917;
+            --colon-color: #D97706;
+            --card-shadow: rgba(180, 83, 9, 0.08);
+        }
+
+        .theme-ganga {
+            /* 3. Ganga Aarti (Sunset Crimson & Temple Gold) */
+            --bg-page: #FAF3F0;
+            --bg-banner: #F4E4DE;
+            --border-accent: #B45309;
+            --header-text: #881337;
+            --heading-gold: #9F1239;
+            --text-label: #4C0519;
+            --text-value: #1F2937;
+            --colon-color: #B45309;
+            --card-shadow: rgba(136, 19, 55, 0.08);
+        }
+
+        .theme-tulsi {
+            /* 4. Pavitra Tulsi (Sacred Basil Green & Antique Gold) */
+            --bg-page: #F3F7F4;
+            --bg-banner: #E4EFE7;
+            --border-accent: #AA7C11;
+            --header-text: #0E3B2E;
+            --heading-gold: #154D3C;
+            --text-label: #1C332B;
+            --text-value: #0A2219;
+            --colon-color: #AA7C11;
+            --card-shadow: rgba(14, 59, 46, 0.08);
+        }
+
+        .theme-peacock {
+            /* 5. Rajwada Mayur (Peacock Blue & Champagne Gold) */
+            --bg-page: #F0F6FA;
+            --bg-banner: #E1EDF5;
+            --border-accent: #C5A059;
+            --header-text: #0369A1;
+            --heading-gold: #0C4A6E;
+            --text-label: #0F172A;
+            --text-value: #0284C7;
+            --colon-color: #C5A059;
+            --card-shadow: rgba(3, 105, 161, 0.08);
+        }
+
+        .theme-navy {
+            /* 6. Rudra Midnight (Deep Royal Navy & Gold) */
+            --bg-page: #F5F7FA;
+            --bg-banner: #E9EEF4;
+            --border-accent: #C5A059;
+            --header-text: #0F2537;
+            --heading-gold: #1A365D;
+            --text-label: #1E293B;
+            --text-value: #0F172A;
+            --colon-color: #C5A059;
+            --card-shadow: rgba(15, 37, 55, 0.08);
+        }
+
+        .theme-pitambari {
+            /* 7. Pitambari Silk (Silk Yellow & Maroon) */
+            --bg-page: #FEFCE8;
+            --bg-banner: #FEF08A;
+            --border-accent: #CA8A04;
+            --header-text: #710E21;
+            --heading-gold: #A16207;
+            --text-label: #422006;
+            --text-value: #1C1917;
+            --colon-color: #CA8A04;
+            --card-shadow: rgba(113, 14, 33, 0.08);
+        }
+
+        .theme-gulal {
+            /* 8. Shingora Gulal (Rose Pink & Rose Gold) */
+            --bg-page: #FDF2F8;
+            --bg-banner: #FCE7F3;
+            --border-accent: #DB2777;
+            --header-text: #831843;
+            --heading-gold: #9D174D;
+            --text-label: #500724;
+            --text-value: #1F2937;
+            --colon-color: #DB2777;
+            --card-shadow: rgba(131, 24, 67, 0.08);
+        }
+
+        .theme-agni {
+            /* 9. Vedic Agni (Sacred Fire Red & Brass) */
+            --bg-page: #FEF2F2;
+            --bg-banner: #FEE2E2;
+            --border-accent: #DC2626;
+            --header-text: #7F1D1D;
+            --heading-gold: #991B1B;
+            --text-label: #450A0A;
+            --text-value: #18181B;
+            --colon-color: #DC2626;
+            --card-shadow: rgba(127, 29, 29, 0.08);
+        }
+
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+            html, body {
+                width: 210mm;
+                height: 297mm;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: var(--bg-page) !important;
+            }
+            .a4-container {
+                width: 210mm !important;
+                height: 297mm !important;
+                max-height: 297mm !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            .hide-on-print {
+                display: none !important;
+            }
+            [contenteditable="true"] {
+                outline: none !important;
+            }
+            .photo-placeholder-text {
+                display: none !important;
+            }
+            .photo-controls-overlay {
+                display: none !important;
+            }
+            .company-footer-print {
+                display: block !important;
+                visibility: visible !important;
+            }
+        }
+
+        body {
+            background-color: #0f172a;
+            font-family: 'Lora', serif;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color: var(--text-value);
+            transition: background-color 0.3s ease;
+        }
+
+        .a4-container {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--bg-page);
+            margin: 1rem auto;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Center Ganesh Ji Background Watermark */
+        .bg-ganesh-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 460px;
+            opacity: 0.10;
+            pointer-events: none;
+            z-index: 0;
+            filter: sepia(0.4) saturate(1.2);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Low opacity sample placeholder styling */
+        .sample-placeholder {
+            color: var(--text-label) !important;
+            opacity: 0.40 !important;
+            font-style: italic !important;
+        }
+
+        [contenteditable="true"]:hover, [contenteditable="true"]:focus {
+            outline: none !important;
+            background-color: transparent !important;
+        }
+
+        .section-banner {
+            background-color: var(--bg-banner);
+            box-shadow: 0 2px 5px var(--card-shadow);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased" id="bodyRoot">
+
+    <!-- TOP FLOATING BAR (CLEAN SINGLE DOWNLOAD PDF BUTTON) -->
+    <div class="hide-on-print sticky top-0 z-50 bg-slate-900/90 backdrop-blur py-3 px-6 shadow-xl border-b border-slate-800">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="font-cinzel font-bold text-amber-400 text-base">Ashutosh Dwivedi</span>
+                <span class="text-xs text-slate-400 font-medium hidden sm:inline">| Matrimonial Biodata</span>
+            </div>
+            
+            <button onclick="window.print()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold py-2 px-6 rounded-lg shadow-lg text-sm transition transform hover:scale-105 flex items-center gap-2 cursor-pointer">
+                <span>📥</span> Download PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN A4 DOCUMENT CANVAS -->
+    <div class="a4-container flex flex-col relative p-9 md:p-11 select-text" id="biodataCanvas">
+        
+        <!-- 1. FULL PAGE GOLDEN BORDER FRAME OVERLAY -->
+        <img src="Border.png" id="frameBorderImg" alt="Ornate Gold Border Frame" class="absolute inset-0 w-full h-full object-fill pointer-events-none z-20" />
+
+        <!-- 2. GANESH JI WATERMARK BACKGROUND -->
+        <img src="Gnaesh-Ji.png" id="bgGaneshImg" alt="Ganesh Ji Watermark" class="bg-ganesh-watermark" />
+
+        <!-- MAIN INNER CONTENT CONTAINER -->
+        <div class="z-10 px-6 py-5 flex-grow flex flex-col justify-between relative h-full">
+            
+            <!-- HEADER: GANESH JI EMBLEM & MANTRA -->
+            <div class="flex flex-col items-center mb-2 text-center">
+                <!-- Ganesha Top Icon Art -->
+                <img src="Gnaesh-Ji.png" id="headerGaneshImg" title="Click to change Header Ganesh Image" onclick="document.getElementById('headerGaneshUpload').click()" alt="Ganesh Ji Icon" class="w-16 h-16 object-contain mb-1 drop-shadow-md cursor-pointer transition-transform duration-300 hover:scale-105" />
+                
+                <div class="text-header-text font-devanagari text-lg font-bold tracking-widest drop-shadow-sm" contenteditable="true">
+                    ॐ ॥ श्री गणेशाय नमः ॥
+                </div>
+                <div class="text-heading-gold font-cinzel text-xs font-bold tracking-widest uppercase mt-0.5" contenteditable="true">
+                    MARRIAGE BIODATA
+                </div>
+            </div>
+
+            <!-- SECTION 1: PERSONAL DETAILS (LEFT) + PHOTO BOX (RIGHT) -->
+            <div class="mb-2">
+                <div class="flex justify-between items-start gap-4">
+                    
+                    <!-- Left Side: Section Title & Personal Info Table -->
+                    <div class="flex-1">
+                        <div class="section-banner px-3 py-1 mb-2 rounded-md">
+                            <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                                PERSONAL DETAILS
+                            </h2>
+                        </div>
+
+                        <div class="flex flex-col gap-1 text-xs font-medium px-1">
+                            <div class="flex items-baseline">
+                                <span class="w-36 font-semibold text-text-label">Full Name</span>
+                                <span class="w-5 text-center text-colon-color font-bold">:</span>
+                                <span contenteditable="true" class="text-text-value font-bold text-sm">Ashutosh Dwivedi</span>
+                            </div>
+                            <div class="flex items-baseline">
+                                <span class="w-36 font-semibold text-text-label">Date of Birth</span>
+                                <span class="w-5 text-center text-colon-color font-bold">:</span>
+                                <span contenteditable="true" class="text-text-value font-semibold">18 May 1996</span>
+                            </div>
+                            <div class="flex items-baseline">
+                                <span class="w-36 font-semibold text-text-label">Time of Birth</span>
+                                <span class="w-5 text-center text-colon-color font-bold">:</span>
+                                <span contenteditable="true" class="text-text-value font-semibold">7:30 PM</span>
+                            </div>
+                            <div class="flex items-baseline">
+                                <span class="w-36 font-semibold text-text-label">Place of Birth</span>
+                                <span class="w-5 text-center text-colon-color font-bold">:</span>
+                                <span contenteditable="true" class="text-text-value font-semibold">Kushinagar, Uttar Pradesh</span>
+                            </div>
+                            <div class="flex items-baseline">
+                                <span class="w-36 font-semibold text-text-label">Height / Weight</span>
+                                <span class="w-5 text-center text-colon-color font-bold">:</span>
+                                <span contenteditable="true" class="text-text-value">5' 8" (173 cm) / 62 kg</span>
+                            </div>
+                            <div class="flex items-baseline">
+                                <span class="w-36 font-semibold text-text-label">Religion / Caste</span>
+                                <span class="w-5 text-center text-colon-color font-bold">:</span>
+                                <span contenteditable="true" class="text-text-value">Hindu / Dwivedi (Brahman)</span>
+                            </div>
+                            <div class="flex items-baseline">
+                                <span class="w-36 font-semibold text-text-label">Gotra</span>
+                                <span class="w-5 text-center text-colon-color font-bold">:</span>
+                                <span contenteditable="true" class="text-text-value">Kashyap</span>
+                            </div>
+                            <div class="flex items-baseline">
+                                <span class="w-36 font-semibold text-text-label">Mother Tongue</span>
+                                <span class="w-5 text-center text-colon-color font-bold">:</span>
+                                <span contenteditable="true" class="text-text-value">Hindi</span>
+                            </div>
+                            <div class="flex items-baseline">
+                                <span class="w-36 font-semibold text-text-label">Marital Status</span>
+                                <span class="w-5 text-center text-colon-color font-bold">:</span>
+                                <span contenteditable="true" class="text-text-value">Unmarried</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Clean Profile Photo Frame -->
+                    <div class="w-36 h-48 border-2 border-border-accent/80 bg-amber-50/30 p-0.5 shadow-md rounded-sm flex-shrink-0 relative flex flex-col items-center justify-center text-center overflow-hidden">
+                        <div id="photoViewport" class="w-full h-full relative overflow-hidden flex items-center justify-center">
+                            <img id="userPhoto" src="ashutosh_photo.jpg" class="w-full h-full object-cover rounded-sm" alt="Ashutosh Dwivedi Profile Photo" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SECTION 2: ASTROLOGICAL / KUNDALI DETAILS -->
+            <div class="mb-2">
+                <div class="section-banner px-3 py-1 mb-1.5 rounded-md">
+                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                        ASTROLOGICAL / KUNDALI DETAILS
+                    </h2>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-xs font-medium px-1">
+                    <div class="flex items-baseline">
+                        <span class="w-28 font-semibold text-text-label">Rashi</span>
+                        <span class="w-4 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Vrishabha (Taurus)</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-28 font-semibold text-text-label">Nakshatra</span>
+                        <span class="w-4 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Rohini (Pada 3)</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-28 font-semibold text-text-label">Lagna</span>
+                        <span class="w-4 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Vrishchika (Scorpio)</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-28 font-semibold text-text-label">Gana</span>
+                        <span class="w-4 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Manushya</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-28 font-semibold text-text-label">Yoni</span>
+                        <span class="w-4 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Sarpa (Serpent)</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-28 font-semibold text-text-label">Nadi</span>
+                        <span class="w-4 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Antya</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-28 font-semibold text-text-label">Varna</span>
+                        <span class="w-4 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Vaishya</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-28 font-semibold text-text-label">Manglik Status</span>
+                        <span class="w-4 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Not Provided</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: EDUCATION & CAREER -->
+            <div class="mb-2">
+                <div class="section-banner px-3 py-1 mb-1.5 rounded-md">
+                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                        EDUCATION & CAREER
+                    </h2>
+                </div>
+                
+                <div class="flex flex-col gap-1 text-xs font-medium px-1">
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Education Qualification</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value font-semibold">MBA – Business Analytics (2023–2025)</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">University / College</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">GLA University</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Profession / Role</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value font-semibold">Digital Marketing Manager</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Current Company</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Mikis Specialities Pvt. Ltd.</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Work Location</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Mahipalpur, Delhi</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: FAMILY BACKGROUND -->
+            <div class="mb-2">
+                <div class="section-banner px-3 py-1 mb-1.5 rounded-md">
+                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                        FAMILY BACKGROUND
+                    </h2>
+                </div>
+                
+                <div class="flex flex-col gap-1 text-xs font-medium px-1">
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Father's Name</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Shri Purushottam Dwivedi (Pandit / Hindu Priest)</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Mother's Name</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Smt. Asha Dwivedi (Homemaker)</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Siblings</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">1 Sister (Married)</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Family Background</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Traditional Pujari / Religious Family</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="w-40 font-semibold text-text-label">Native Place</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="flex-1 text-text-value">Village & Post Luxmipur Babu, District Kushinagar, UP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 5: CONTACT INFORMATION -->
+            <div class="mb-1">
+                <div class="section-banner px-3 py-1 mb-1.5 rounded-md">
+                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                        CONTACT INFORMATION
+                    </h2>
+                </div>
+                
+                <div class="flex flex-col gap-1 text-xs font-medium px-1">
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Mobile Number</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value font-semibold">+91 8950625452</span>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="w-40 font-semibold text-text-label">Email Address</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="text-text-value">Ashutosh18597@gmail.com</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="w-40 font-semibold text-text-label">Present Address</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="flex-1 text-text-value">Yamunanagar, Haryana</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="w-40 font-semibold text-text-label">Permanent Address</span>
+                        <span class="w-5 text-center text-colon-color font-bold">:</span>
+                        <span contenteditable="true" class="flex-1 text-text-value">Village & Post Luxmipur Babu, District Kushinagar, Uttar Pradesh</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER BLESSING & PRINT COMPANY CREDIT -->
+            <div class="text-center pt-2 mt-auto flex flex-col items-center gap-1">
+                <span class="font-devanagari text-header-text text-base font-semibold tracking-widest" contenteditable="true">
+                    ❁ शुभ मंगलम् ❁
+                </span>
+                <span class="company-footer-print text-[10px] text-heading-gold font-cinzel font-semibold tracking-wider">
+                    Created & Managed by ASHA IT Solution (+91 8950625452)
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- INTERACTIVE STUDIO CONTROLLER SCRIPTS -->
+    <script>
+        // Sample Field Focus / Typing Handling
+        document.querySelectorAll('.editable-sample').forEach(el => {
+            el.addEventListener('focus', function() {
+                if (this.classList.contains('sample-placeholder')) {
+                    this.classList.remove('sample-placeholder');
+                }
+            });
+            el.addEventListener('blur', function() {
+                if (!this.innerText.trim()) {
+                    this.innerText = this.getAttribute('data-sample') || '';
+                    this.classList.add('sample-placeholder');
+                }
+            });
+        });
+
+        // 9 Hindu Calendar Themes Switcher
+        function changeTheme(theme) {
+            const body = document.getElementById('bodyRoot');
+            body.className = "antialiased";
+            if (theme !== 'default') {
+                body.classList.add('theme-' + theme);
+            }
+        }
+
+        // Live Font Selector Switcher
+        function changeFont(fontKey) {
+            const canvas = document.getElementById('biodataCanvas');
+            const fontMap = {
+                'lora': "'Lora', serif",
+                'playfair': "'Playfair Display', serif",
+                'cinzel': "'Cinzel', serif",
+                'cormorant': "'Cormorant Garamond', serif",
+                'merriweather': "'Merriweather', serif",
+                'marcellus': "'Marcellus', serif",
+                'philosopher': "'Philosopher', sans-serif"
+            };
+            if (canvas && fontMap[fontKey]) {
+                canvas.style.fontFamily = fontMap[fontKey];
+                localStorage.setItem('biodata_selected_font', fontKey);
+            }
+        }
+
+        function restoreFont() {
+            const savedFont = localStorage.getItem('biodata_selected_font');
+            if (savedFont && document.getElementById('fontSelect')) {
+                document.getElementById('fontSelect').value = savedFont;
+                changeFont(savedFont);
+            }
+        }
+
+        // Profile Photo Upload Preview
+        function uploadImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.getElementById('userPhoto');
+                const placeholder = document.getElementById('photoPlaceholder');
+                img.src = reader.result;
+                img.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+                resetPhotoTransform();
+            };
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        // Live Photo Zoom & Pan Transformations
+        function adjustPhotoTransform() {
+            const zoom = document.getElementById('photoZoom').value / 100;
+            const panX = document.getElementById('photoPanX').value;
+            const panY = document.getElementById('photoPanY').value;
+            const img = document.getElementById('userPhoto');
+            img.style.transform = `scale(${zoom}) translate(${panX}px, ${panY}px)`;
+        }
+
+        function resetPhotoTransform() {
+            const zoomEl = document.getElementById('photoZoom');
+            if (zoomEl) zoomEl.value = 105;
+            const panXEl = document.getElementById('photoPanX');
+            if (panXEl) panXEl.value = 0;
+            const panYEl = document.getElementById('photoPanY');
+            if (panYEl) panYEl.value = 4;
+            const img = document.getElementById('userPhoto');
+            if (img) img.style.transform = `scale(1.05) translate(0px, 4px)`;
+        }
+
+        // Mouse Drag to Pan & Wheel to Zoom on Photo Frame
+        let isDraggingPhoto = false;
+        let startX = 0, startY = 0;
+        const photoViewport = document.getElementById('photoViewport');
+
+        photoViewport.addEventListener('mousedown', (e) => {
+            if (document.getElementById('userPhoto').classList.contains('hidden')) return;
+            isDraggingPhoto = true;
+            startX = e.clientX - parseInt(document.getElementById('photoPanX').value);
+            startY = e.clientY - parseInt(document.getElementById('photoPanY').value);
+            e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDraggingPhoto) return;
+            const newX = Math.min(Math.max(e.clientX - startX, -100), 100);
+            const newY = Math.min(Math.max(e.clientY - startY, -100), 100);
+            document.getElementById('photoPanX').value = newX;
+            document.getElementById('photoPanY').value = newY;
+            adjustPhotoTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDraggingPhoto = false;
+        });
+
+        photoViewport.addEventListener('wheel', (e) => {
+            if (document.getElementById('userPhoto').classList.contains('hidden')) return;
+            e.preventDefault();
+            let zoomSlider = document.getElementById('photoZoom');
+            let currentZoom = parseInt(zoomSlider.value);
+            if (e.deltaY < 0) {
+                currentZoom = Math.min(currentZoom + 5, 250);
+            } else {
+                currentZoom = Math.max(currentZoom - 5, 50);
+            }
+            zoomSlider.value = currentZoom;
+            adjustPhotoTransform();
+        });
+
+        // Header Ganesh Image Upload Preview
+        function changeHeaderGanesh(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.getElementById('headerGaneshImg');
+                img.src = reader.result;
+            };
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        // Watermark Ganesh Background Upload Preview
+        function changeBgGanesh(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.getElementById('bgGaneshImg');
+                img.src = reader.result;
+            };
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        // Live Watermark Opacity Slider
+        function changeWatermarkOpacity(val) {
+            const img = document.getElementById('bgGaneshImg');
+            img.style.opacity = (val / 100);
+        }
+
+        // Auto Save & Restore Draft in LocalStorage
+        const DRAFT_VERSION = "ashutosh_v2_clean";
+
+        function saveDraft() {
+            const data = [];
+            document.querySelectorAll('[contenteditable="true"]').forEach((el) => {
+                data.push({
+                    text: el.innerText,
+                    isPlaceholder: el.classList.contains('sample-placeholder')
+                });
+            });
+            localStorage.setItem('biodata_ashutosh_draft_data', JSON.stringify(data));
+            localStorage.setItem('biodata_ashutosh_draft_ver', DRAFT_VERSION);
+        }
+
+        function loadDraft() {
+            const ver = localStorage.getItem('biodata_ashutosh_draft_ver');
+            if (ver !== DRAFT_VERSION) {
+                // Reset old draft so newly formatted clean details display
+                localStorage.removeItem('biodata_ashutosh_draft');
+                localStorage.removeItem('biodata_ashutosh_draft_data');
+                return;
+            }
+            const saved = localStorage.getItem('biodata_ashutosh_draft_data');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    const editables = document.querySelectorAll('[contenteditable="true"]');
+                    editables.forEach((el, index) => {
+                        if (data[index]) {
+                            el.innerText = data[index].text;
+                            if (data[index].isPlaceholder) {
+                                el.classList.add('sample-placeholder');
+                            } else {
+                                el.classList.remove('sample-placeholder');
+                            }
+                        }
+                    });
+                } catch(e) {
+                    console.error("Draft load error:", e);
+                }
+            }
+        }
+
+        document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+            el.addEventListener('input', saveDraft);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDraft();
+            restoreFont();
+            adjustPhotoTransform();
+        });
+    </script>
+</body>
+</html>
