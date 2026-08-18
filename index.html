@@ -251,6 +251,23 @@
 </head>
 <body class="antialiased" id="bodyRoot">
 
+    <!-- PASSWORD MODAL -->
+    <div id="passwordModal" style="display:none;" class="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-amber-500/40 rounded-2xl shadow-2xl p-8 w-80 flex flex-col items-center gap-4">
+            <div class="text-4xl">🔐</div>
+            <h2 class="text-amber-400 font-cinzel font-bold text-lg tracking-wider">Edit Mode</h2>
+            <p class="text-slate-400 text-xs text-center">Sirf admin edit kar sakta hai.<br>Password daalo:</p>
+            <input id="passwordInput" type="password" placeholder="Password yahan daalo..."
+                class="w-full bg-slate-800 border border-amber-500/50 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-amber-400 text-center tracking-widest"
+                onkeydown="if(event.key==='Enter') checkPassword()" />
+            <div id="passwordError" class="text-red-400 text-xs hidden">❌ Galat password! Dobara try karo.</div>
+            <div class="flex gap-3 w-full">
+                <button onclick="checkPassword()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2 rounded-lg text-sm transition">Unlock ✅</button>
+                <button onclick="closeModal()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 rounded-lg text-sm transition">Raho ❌</button>
+            </div>
+        </div>
+    </div>
+
     <!-- TOP FLOATING BAR (CLEAN SINGLE DOWNLOAD PDF BUTTON) -->
     <div class="hide-on-print sticky top-0 z-50 bg-slate-900/90 backdrop-blur py-3 px-6 shadow-xl border-b border-slate-800">
         <div class="max-w-4xl mx-auto flex items-center justify-between">
@@ -259,9 +276,21 @@
                 <span class="text-xs text-slate-400 font-medium hidden sm:inline">| Matrimonial Biodata</span>
             </div>
             
-            <button onclick="window.print()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold py-2 px-6 rounded-lg shadow-lg text-sm transition transform hover:scale-105 flex items-center gap-2 cursor-pointer">
-                <span>📥</span> Download PDF
-            </button>
+            <div class="flex items-center gap-3">
+                <!-- Edit Mode Button (always visible) -->
+                <button id="editModeBtn" onclick="openPasswordModal()" 
+                    class="bg-slate-700 hover:bg-slate-600 text-amber-400 font-bold py-2 px-4 rounded-lg shadow text-sm transition flex items-center gap-2 cursor-pointer border border-amber-500/30">
+                    🔒 Edit
+                </button>
+                <!-- Exit Edit Mode Button (hidden by default) -->
+                <button id="exitEditBtn" onclick="exitEditMode()" style="display:none;"
+                    class="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow text-sm transition flex items-center gap-2 cursor-pointer">
+                    ✅ Save & Lock
+                </button>
+                <button onclick="window.print()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold py-2 px-6 rounded-lg shadow-lg text-sm transition transform hover:scale-105 flex items-center gap-2 cursor-pointer">
+                    <span>📥</span> Download PDF
+                </button>
+            </div>
         </div>
     </div>
 
@@ -298,7 +327,7 @@
                     <!-- Left Side: Section Title & Personal Info Table -->
                     <div class="flex-1">
                         <div class="section-banner px-3 py-1 mb-2 rounded-md">
-                            <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                            <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider">
                                 PERSONAL DETAILS
                             </h2>
                         </div>
@@ -307,47 +336,47 @@
                             <div class="flex items-baseline">
                                 <span class="w-36 font-semibold text-text-label">Full Name</span>
                                 <span class="w-5 text-center text-colon-color font-bold">:</span>
-                                <span contenteditable="true" class="text-text-value font-bold text-sm">Ashutosh Dwivedi</span>
+                                <span class="text-text-value font-bold text-sm">Ashutosh Dwivedi</span>
                             </div>
                             <div class="flex items-baseline">
                                 <span class="w-36 font-semibold text-text-label">Date of Birth</span>
                                 <span class="w-5 text-center text-colon-color font-bold">:</span>
-                                <span contenteditable="true" class="text-text-value font-semibold">18 May 1996</span>
+                                <span class="text-text-value font-semibold">18 May 1996</span>
                             </div>
                             <div class="flex items-baseline">
                                 <span class="w-36 font-semibold text-text-label">Time of Birth</span>
                                 <span class="w-5 text-center text-colon-color font-bold">:</span>
-                                <span contenteditable="true" class="text-text-value font-semibold">7:30 PM</span>
+                                <span class="text-text-value font-semibold">7:30 PM</span>
                             </div>
                             <div class="flex items-baseline">
                                 <span class="w-36 font-semibold text-text-label">Place of Birth</span>
                                 <span class="w-5 text-center text-colon-color font-bold">:</span>
-                                <span contenteditable="true" class="text-text-value font-semibold">Kushinagar, Uttar Pradesh</span>
+                                <span class="text-text-value font-semibold">Kushinagar, Uttar Pradesh</span>
                             </div>
                             <div class="flex items-baseline">
                                 <span class="w-36 font-semibold text-text-label">Height / Weight</span>
                                 <span class="w-5 text-center text-colon-color font-bold">:</span>
-                                <span contenteditable="true" class="text-text-value">5' 8" (173 cm) / 62 kg</span>
+                                <span class="text-text-value">5' 8" (173 cm) / 62 kg</span>
                             </div>
                             <div class="flex items-baseline">
                                 <span class="w-36 font-semibold text-text-label">Religion / Caste</span>
                                 <span class="w-5 text-center text-colon-color font-bold">:</span>
-                                <span contenteditable="true" class="text-text-value">Hindu / Dwivedi (Brahman)</span>
+                                <span class="text-text-value">Hindu / Dwivedi (Brahman)</span>
                             </div>
                             <div class="flex items-baseline">
                                 <span class="w-36 font-semibold text-text-label">Gotra</span>
                                 <span class="w-5 text-center text-colon-color font-bold">:</span>
-                                <span contenteditable="true" class="text-text-value">Kashyap</span>
+                                <span class="text-text-value">Kashyap</span>
                             </div>
                             <div class="flex items-baseline">
                                 <span class="w-36 font-semibold text-text-label">Mother Tongue</span>
                                 <span class="w-5 text-center text-colon-color font-bold">:</span>
-                                <span contenteditable="true" class="text-text-value">Hindi</span>
+                                <span class="text-text-value">Hindi</span>
                             </div>
                             <div class="flex items-baseline">
                                 <span class="w-36 font-semibold text-text-label">Marital Status</span>
                                 <span class="w-5 text-center text-colon-color font-bold">:</span>
-                                <span contenteditable="true" class="text-text-value">Unmarried</span>
+                                <span class="text-text-value">Unmarried</span>
                             </div>
                         </div>
                     </div>
@@ -365,7 +394,7 @@
             <!-- SECTION 2: ASTROLOGICAL / KUNDALI DETAILS -->
             <div class="mb-2">
                 <div class="section-banner px-3 py-1 mb-1.5 rounded-md">
-                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider">
                         ASTROLOGICAL / KUNDALI DETAILS
                     </h2>
                 </div>
@@ -374,42 +403,42 @@
                     <div class="flex items-baseline">
                         <span class="w-28 font-semibold text-text-label">Rashi</span>
                         <span class="w-4 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Vrishabha (Taurus)</span>
+                        <span class="text-text-value">Vrishabha (Taurus)</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-28 font-semibold text-text-label">Nakshatra</span>
                         <span class="w-4 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Rohini (Pada 3)</span>
+                        <span class="text-text-value">Rohini (Pada 3)</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-28 font-semibold text-text-label">Lagna</span>
                         <span class="w-4 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Vrishchika (Scorpio)</span>
+                        <span class="text-text-value">Vrishchika (Scorpio)</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-28 font-semibold text-text-label">Gana</span>
                         <span class="w-4 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Manushya</span>
+                        <span class="text-text-value">Manushya</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-28 font-semibold text-text-label">Yoni</span>
                         <span class="w-4 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Sarpa (Serpent)</span>
+                        <span class="text-text-value">Sarpa (Serpent)</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-28 font-semibold text-text-label">Nadi</span>
                         <span class="w-4 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Antya</span>
+                        <span class="text-text-value">Antya</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-28 font-semibold text-text-label">Varna</span>
                         <span class="w-4 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Vaishya</span>
+                        <span class="text-text-value">Vaishya</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-28 font-semibold text-text-label">Manglik Status</span>
                         <span class="w-4 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Not Provided</span>
+                        <span class="text-text-value">Not Provided</span>
                     </div>
                 </div>
             </div>
@@ -417,7 +446,7 @@
             <!-- SECTION 3: EDUCATION & CAREER -->
             <div class="mb-2">
                 <div class="section-banner px-3 py-1 mb-1.5 rounded-md">
-                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider">
                         EDUCATION & CAREER
                     </h2>
                 </div>
@@ -426,27 +455,27 @@
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Education Qualification</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value font-semibold">MBA – Business Analytics (2023–2025)</span>
+                        <span class="text-text-value font-semibold">MBA – Business Analytics (2023–2025)</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">University / College</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">GLA University</span>
+                        <span class="text-text-value">GLA University</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Profession / Role</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value font-semibold">Digital Marketing Manager</span>
+                        <span class="text-text-value font-semibold">Digital Marketing Manager</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Current Company</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Mikis Specialities Pvt. Ltd.</span>
+                        <span class="text-text-value">Mikis Specialities Pvt. Ltd.</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Work Location</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Mahipalpur, Delhi</span>
+                        <span class="text-text-value">Mahipalpur, Delhi</span>
                     </div>
                 </div>
             </div>
@@ -454,7 +483,7 @@
             <!-- SECTION 4: FAMILY BACKGROUND -->
             <div class="mb-2">
                 <div class="section-banner px-3 py-1 mb-1.5 rounded-md">
-                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider">
                         FAMILY BACKGROUND
                     </h2>
                 </div>
@@ -463,27 +492,27 @@
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Father's Name</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Shri Purushottam Dwivedi (Pandit / Hindu Priest)</span>
+                        <span class="text-text-value">Shri Purushottam Dwivedi (Pandit / Hindu Priest)</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Mother's Name</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Smt. Asha Dwivedi (Homemaker)</span>
+                        <span class="text-text-value">Smt. Asha Dwivedi (Homemaker)</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Siblings</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">1 Sister (Married)</span>
+                        <span class="text-text-value">1 Sister (Married)</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Family Background</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Traditional Pujari / Religious Family</span>
+                        <span class="text-text-value">Traditional Pujari / Religious Family</span>
                     </div>
                     <div class="flex items-start">
                         <span class="w-40 font-semibold text-text-label">Native Place</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="flex-1 text-text-value">Village & Post Luxmipur Babu, District Kushinagar, UP</span>
+                        <span class="flex-1 text-text-value">Village & Post Luxmipur Babu, District Kushinagar, UP</span>
                     </div>
                 </div>
             </div>
@@ -491,7 +520,7 @@
             <!-- SECTION 5: CONTACT INFORMATION -->
             <div class="mb-1">
                 <div class="section-banner px-3 py-1 mb-1.5 rounded-md">
-                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider" contenteditable="true">
+                    <h2 class="text-xs font-playfair font-bold text-header-text uppercase tracking-wider">
                         CONTACT INFORMATION
                     </h2>
                 </div>
@@ -500,29 +529,29 @@
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Mobile Number</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value font-semibold">+91 8950625452</span>
+                        <span class="text-text-value font-semibold">+91 8950625452</span>
                     </div>
                     <div class="flex items-baseline">
                         <span class="w-40 font-semibold text-text-label">Email Address</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="text-text-value">Ashutosh18597@gmail.com</span>
+                        <span class="text-text-value">Ashutosh18597@gmail.com</span>
                     </div>
                     <div class="flex items-start">
                         <span class="w-40 font-semibold text-text-label">Present Address</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="flex-1 text-text-value">Yamunanagar, Haryana</span>
+                        <span class="flex-1 text-text-value">Yamunanagar, Haryana</span>
                     </div>
                     <div class="flex items-start">
                         <span class="w-40 font-semibold text-text-label">Permanent Address</span>
                         <span class="w-5 text-center text-colon-color font-bold">:</span>
-                        <span contenteditable="true" class="flex-1 text-text-value">Village & Post Luxmipur Babu, District Kushinagar, Uttar Pradesh</span>
+                        <span class="flex-1 text-text-value">Village & Post Luxmipur Babu, District Kushinagar, Uttar Pradesh</span>
                     </div>
                 </div>
             </div>
 
             <!-- FOOTER BLESSING & PRINT COMPANY CREDIT -->
             <div class="text-center pt-2 mt-auto flex flex-col items-center gap-1">
-                <span class="font-devanagari text-header-text text-base font-semibold tracking-widest" contenteditable="true">
+                <span class="font-devanagari text-header-text text-base font-semibold tracking-widest">
                     ❁ शुभ मंगलम् ❁
                 </span>
                 <span class="company-footer-print text-[10px] text-heading-gold font-cinzel font-semibold tracking-wider">
@@ -535,6 +564,101 @@
 
     <!-- INTERACTIVE STUDIO CONTROLLER SCRIPTS -->
     <script>
+        // =============================================
+        // 🔐 PASSWORD PROTECTED EDIT MODE
+        // =============================================
+        const EDIT_PASSWORD = "ashait2024"; // ← Yahan apna password change karo
+
+        // Jinhe editable banana hai (section headers + value fields)
+        const EDITABLE_SELECTORS = [
+            'span[class*="text-text-value"]',
+            'span[class*="text-header-text"][class*="font-devanagari"]',
+            'h2[class*="text-header-text"]'
+        ];
+
+        function openPasswordModal() {
+            document.getElementById('passwordModal').style.display = 'flex';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordError').classList.add('hidden');
+            setTimeout(() => document.getElementById('passwordInput').focus(), 100);
+        }
+
+        function closeModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if (input === EDIT_PASSWORD) {
+                closeModal();
+                enableEditMode();
+            } else {
+                document.getElementById('passwordError').classList.remove('hidden');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+
+        function enableEditMode() {
+            // Sab editable fields enable karo
+            document.querySelectorAll('span, h2, p').forEach(el => {
+                if (
+                    el.closest('#passwordModal') ||
+                    el.closest('.hide-on-print') ||
+                    el.closest('.company-footer-print')
+                ) return;
+                if (
+                    el.tagName === 'H2' ||
+                    el.className.includes('text-text-value') ||
+                    el.className.includes('font-devanagari')
+                ) {
+                    el.setAttribute('contenteditable', 'true');
+                    el.style.outline = '1.5px dashed #C5A059';
+                    el.style.borderRadius = '3px';
+                    el.style.cursor = 'text';
+                }
+            });
+            document.getElementById('editModeBtn').style.display = 'none';
+            document.getElementById('exitEditBtn').style.display = 'flex';
+            // Banner notification
+            showBanner('✏️ Edit Mode ON — Ab aap changes kar sakte ho!', 'green');
+        }
+
+        function exitEditMode() {
+            // Sab editable fields disable karo
+            document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+                el.removeAttribute('contenteditable');
+                el.style.outline = '';
+                el.style.borderRadius = '';
+                el.style.cursor = '';
+            });
+            document.getElementById('editModeBtn').style.display = 'flex';
+            document.getElementById('exitEditBtn').style.display = 'none';
+            saveDraft();
+            showBanner('🔒 Locked! Changes save ho gaye.', 'amber');
+        }
+
+        function showBanner(msg, color) {
+            const banner = document.createElement('div');
+            banner.textContent = msg;
+            banner.style.cssText = `
+                position:fixed; top:70px; left:50%; transform:translateX(-50%);
+                background:${color === 'green' ? '#166534' : '#92400e'};
+                color:white; padding:10px 24px; border-radius:10px;
+                font-size:13px; font-weight:bold; z-index:9999;
+                box-shadow:0 4px 20px rgba(0,0,0,0.4);
+                transition: opacity 0.5s;
+            `;
+            document.body.appendChild(banner);
+            setTimeout(() => { banner.style.opacity = '0'; setTimeout(() => banner.remove(), 500); }, 2500);
+        }
+
+        // Close modal on background click
+        document.getElementById('passwordModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        // =============================================
+
         // Sample Field Focus / Typing Handling
         document.querySelectorAll('.editable-sample').forEach(el => {
             el.addEventListener('focus', function() {
